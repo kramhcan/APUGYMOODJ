@@ -14,7 +14,7 @@ public class LoginGUI extends JFrame {
 
         loginFrame = new JFrame("Login Page");
         loginFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        loginFrame.setPreferredSize(new Dimension(288,204));
+        loginFrame.setPreferredSize(new Dimension(400,300));
         loginFrame.setResizable(false);
 
         loginFrame.add(mainPanel);
