@@ -1,13 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginGUI extends JFrame {
     private JPanel mainPanel;
     private JTextField usernameField;
-    private JTextField passwordField;
     private JLabel passwordLabel;
     private JLabel usernameLabel;
     private JButton loginButton;
+    private JPasswordField passwordField;
     private JFrame loginFrame;
 
     public LoginGUI(){
@@ -23,5 +25,15 @@ public class LoginGUI extends JFrame {
         loginFrame.setLocationRelativeTo(null);
         loginFrame.setVisible(true);
 
+        loginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String username = usernameField.getText();
+                String password = String.valueOf(passwordField.getPassword());
+
+                //Test if fields are working
+                System.out.println("Username : " + username + ";Password : " + password);
+            }
+        });
     }
 }

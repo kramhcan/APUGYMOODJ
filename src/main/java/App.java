@@ -1,4 +1,4 @@
 public class App {
     public static void main(String[] args) {
-        new LoginGUI(); }
+        LoginGUI loginGUI = new LoginGUI(); }
 }
