@@ -83,36 +83,36 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="48733" class="javax.swing.JButton" binding="button1" default-binding="true">
+          <component id="48733" class="javax.swing.JButton" binding="bookingButton" default-binding="true">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Booking"/>
             </properties>
           </component>
-          <component id="ea11" class="javax.swing.JButton" binding="button4" default-binding="true">
+          <component id="ea11" class="javax.swing.JButton" binding="paymentButton" default-binding="true">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Payment"/>
             </properties>
           </component>
-          <component id="75869" class="javax.swing.JButton" binding="button5" default-binding="true">
+          <component id="75869" class="javax.swing.JButton" binding="feedbackButton" default-binding="true">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Feedback"/>
             </properties>
           </component>
-          <component id="41f48" class="javax.swing.JButton" binding="button6" default-binding="true">
+          <component id="41f48" class="javax.swing.JButton" binding="sessionsButton" default-binding="true">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
-              <text value="Button"/>
+              <text value="Sessions"/>
             </properties>
           </component>
         </children>

@@ -7,10 +7,10 @@ public class IndexGUI extends JFrame {
     private JPanel panel1;
     private JButton loginButton;
     private JButton registerButton;
-    private JButton button1;
-    private JButton button4;
-    private JButton button5;
-    private JButton button6;
+    private JButton bookingButton;
+    private JButton paymentButton;
+    private JButton feedbackButton;
+    private JButton sessionsButton;
     private JButton logoutButton;
     private JLabel nameLabel;
     private JFrame mainFrame;
@@ -27,6 +27,11 @@ public class IndexGUI extends JFrame {
         mainFrame.setVisible(true);
 
         logoutButton.setVisible(false);
+
+        bookingButton.setEnabled(false);
+        paymentButton.setEnabled(false);
+        feedbackButton.setEnabled(false);
+        sessionsButton.setEnabled(false);
 
         loginButton.addActionListener(new ActionListener() {
             @Override
