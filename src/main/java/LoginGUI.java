@@ -12,6 +12,9 @@ public class LoginGUI extends JFrame {
     private JPasswordField passwordField;
     private JFrame loginFrame;
 
+    String username = "";
+    String password = "";
+
     public LoginGUI(){
 
         loginFrame = new JFrame("Login Page");
@@ -28,12 +31,24 @@ public class LoginGUI extends JFrame {
         loginButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String username = usernameField.getText();
-                String password = String.valueOf(passwordField.getPassword());
 
-                //Test if fields are working
-                System.out.println("Username : " + username + ";Password : " + password);
+                username = usernameField.getText();
+                password = String.valueOf(passwordField.getPassword());
+
+                ReadWrite readWrite = new ReadWrite();
+                boolean x = readWrite.Login(username, password);
+
+                if(x==true){
+                    System.out.println("Login successful");
+                    JOptionPane.showMessageDialog(loginFrame,"Login Successful\r\nWelcome back," + username);
+                    loginFrame.dispose();
+                    /*IndexGUI indexGUI = new IndexGUI();*/}
+                else {
+                    System.out.println("Login failed");}
+
             }
         });
+
+
     }
 }

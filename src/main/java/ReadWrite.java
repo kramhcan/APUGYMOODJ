@@ -1,11 +1,10 @@
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
  * Class with read + write methods
  */
-public class ReadWriteTest {
+public class ReadWrite {
 
     public void Reader() {
         Scanner x = new Scanner("C:\\Users\\markc\\IdeaProjects\\APUGYMOODJ\\src\\main\\resources\\ReadWrite.txt");
@@ -82,7 +81,7 @@ public class ReadWriteTest {
             {
                     recordUsername = x.next();
                     recordPassword = x.next();
-                    x.nextLine();
+                    emptySpace = x.next();
                     if(recordUsername.equals(username) && recordPassword.equals(password)){  return true;  }
             }
 
