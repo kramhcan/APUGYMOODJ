@@ -1,7 +1,10 @@
 import javax.swing.*;
+import javax.swing.plaf.FontUIResource;
+import javax.swing.text.StyleContext;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Locale;
 
 public class LoginGUI extends JFrame {
     private JPanel mainPanel;
@@ -15,11 +18,11 @@ public class LoginGUI extends JFrame {
     String username = "";
     String password = "";
 
-    public LoginGUI(){
+    public LoginGUI() {
 
         loginFrame = new JFrame("Login Page");
         loginFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        loginFrame.setPreferredSize(new Dimension(400,300));
+        loginFrame.setPreferredSize(new Dimension(400, 300));
         loginFrame.setResizable(false);
 
         loginFrame.add(mainPanel);
@@ -38,17 +41,14 @@ public class LoginGUI extends JFrame {
                 ReadWrite readWrite = new ReadWrite();
                 boolean x = readWrite.Login(username, password);
 
-                if(x==true){
+                if (x == true) {
                     System.out.println("Login successful");
-                    JOptionPane.showMessageDialog(loginFrame,"Login Successful\r\nWelcome back," + username);
+                    JOptionPane.showMessageDialog(loginFrame, "Login Successful\r\nWelcome back," + username);
                     loginFrame.dispose();
-                    /*IndexGUI indexGUI = new IndexGUI();*/}
+                    IndexGUI indexGUI = new IndexGUI(username); }
                 else {
-                    System.out.println("Login failed");}
-
+                    System.out.println("Login failed"); }
             }
         });
-
-
     }
 }
