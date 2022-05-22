@@ -14,6 +14,7 @@ public class IndexGUI extends JFrame {
     private JButton logoutButton;
     private JLabel nameLabel;
     private JFrame mainFrame;
+
     public IndexGUI(){
         mainFrame = new JFrame("Index Page");
         mainFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -41,6 +42,13 @@ public class IndexGUI extends JFrame {
             }
         });
 
+        registerButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RegisterGUI rg = new RegisterGUI();
+                mainFrame.dispose();
+            }
+        });
     }
 
     public IndexGUI(String username){
