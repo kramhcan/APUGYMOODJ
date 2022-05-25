@@ -51,6 +51,13 @@ public class IndexGUI extends JFrame {
                 mainFrame.dispose();
             }
         });
+        customersButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                staffListGUI sl = new staffListGUI();
+                mainFrame.dispose();
+            }
+        });
     }
 
     public IndexGUI(String username){

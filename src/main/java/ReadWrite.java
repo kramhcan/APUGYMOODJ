@@ -1,9 +1,9 @@
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.*;
 
 /**
  * Class with methods involving file reading
@@ -132,5 +132,38 @@ public class ReadWrite {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public Object[][] staffTableData(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Staff.txt"));
+            String s="";
+            Path path = Path.of("src/main/resources/Staff.txt");
+            int lines = (int) Files.lines(path).count();
+
+            Object dataMulti[][]= new Object[lines][10];
+            Object dataSingle[] = new Object[12];
+
+            int r = 0;
+            while ((s=br.readLine()) != null){
+                dataSingle = s.split(",");
+                dataMulti[r][0] = dataSingle[0];
+                dataMulti[r][1] = dataSingle[3];
+                dataMulti[r][2] = dataSingle[4];
+                dataMulti[r][3] = dataSingle[5];
+                dataMulti[r][4] = dataSingle[6];
+                dataMulti[r][5] = dataSingle[7];
+                dataMulti[r][6] = dataSingle[8];
+                dataMulti[r][7] = dataSingle[9];
+                dataMulti[r][8] = dataSingle[10];
+                dataMulti[r][9] = dataSingle[11];
+                r++;
+                System.out.println(r);
+            }
+            return dataMulti;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 }
