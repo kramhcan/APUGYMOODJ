@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="RegisterGUI">
-  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="21" column-count="9" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="25" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
-      <xy x="20" y="20" width="695" height="584"/>
+      <xy x="20" y="20" width="695" height="659"/>
     </constraints>
     <properties>
       <background color="-12828863"/>
@@ -13,7 +13,7 @@
     <children>
       <component id="9d6d7" class="javax.swing.JTextField" binding="usernameTxt">
         <constraints>
-          <grid row="3" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="3" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -55,7 +55,7 @@
       </component>
       <component id="342e9" class="javax.swing.JTextField" binding="firstNameTxt">
         <constraints>
-          <grid row="7" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="7" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -82,7 +82,7 @@
       </vspacer>
       <component id="e2a3f" class="javax.swing.JTextField" binding="lastNameTxt">
         <constraints>
-          <grid row="9" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="9" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -127,7 +127,7 @@
       </component>
       <component id="bbb8f" class="javax.swing.JTextField" binding="contactTxt">
         <constraints>
-          <grid row="13" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="13" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -173,9 +173,9 @@
           <text value="Email"/>
         </properties>
       </component>
-      <component id="48fe3" class="javax.swing.JTextField" binding="textField1" default-binding="true">
+      <component id="48fe3" class="javax.swing.JTextField" binding="emailTxt">
         <constraints>
-          <grid row="17" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="17" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -188,7 +188,7 @@
       </vspacer>
       <component id="44a18" class="javax.swing.JTextField" binding="addressTxt">
         <constraints>
-          <grid row="11" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="11" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -196,7 +196,7 @@
       </component>
       <component id="cfce3" class="javax.swing.JPasswordField" binding="passwordTxt">
         <constraints>
-          <grid row="5" column="3" row-span="1" col-span="5" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+          <grid row="5" column="3" row-span="1" col-span="6" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -213,12 +213,12 @@
         </constraints>
         <properties>
           <foreground color="-1"/>
-          <text value="DOB (dd/MM/YYYY)"/>
+          <text value="DOB"/>
         </properties>
       </component>
       <component id="6bcc5" class="com.github.lgooddatepicker.components.DatePicker" binding="datePicker">
         <constraints>
-          <grid row="19" column="3" row-span="1" col-span="4" vsize-policy="7" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="19" column="3" row-span="1" col-span="5" vsize-policy="7" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties/>
       </component>
@@ -229,7 +229,7 @@
       </hspacer>
       <hspacer id="1521f">
         <constraints>
-          <grid row="5" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="5" column="9" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
       <component id="e9b0c" class="javax.swing.JButton" binding="backButton" default-binding="true">
@@ -247,7 +247,7 @@
       </vspacer>
       <component id="434b4" class="javax.swing.JRadioButton" binding="femaleRadioButton" default-binding="true">
         <constraints>
-          <grid row="15" column="4" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="15" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <background color="-12828863"/>
@@ -258,9 +258,57 @@
       </component>
       <hspacer id="4321e">
         <constraints>
-          <grid row="6" column="7" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="6" column="8" row-span="1" col-span="1" vsize-policy="1" hsize-policy="6" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
       </hspacer>
+      <vspacer id="5e736">
+        <constraints>
+          <grid row="22" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="30480" class="javax.swing.JButton" binding="registerButton" default-binding="true">
+        <constraints>
+          <grid row="23" column="1" row-span="1" col-span="4" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Register"/>
+        </properties>
+      </component>
+      <vspacer id="2701">
+        <constraints>
+          <grid row="24" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="11571" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="21" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <foreground color="-1"/>
+          <text value="User Type"/>
+        </properties>
+      </component>
+      <component id="13778" class="javax.swing.JRadioButton" binding="staffRadioButton" default-binding="true">
+        <constraints>
+          <grid row="21" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12828863"/>
+          <enabled value="true"/>
+          <foreground color="-1"/>
+          <text value="Staff"/>
+        </properties>
+      </component>
+      <component id="7bfcf" class="javax.swing.JRadioButton" binding="trainerRadioButton" default-binding="true">
+        <constraints>
+          <grid row="21" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-12828863"/>
+          <foreground color="-1"/>
+          <text value="Trainer"/>
+        </properties>
+      </component>
     </children>
   </grid>
   <buttonGroups>

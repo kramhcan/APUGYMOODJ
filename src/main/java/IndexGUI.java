@@ -13,6 +13,8 @@ public class IndexGUI extends JFrame {
     private JButton sessionsButton;
     private JButton logoutButton;
     private JLabel nameLabel;
+    private JButton customersButton;
+    private JButton cusRegisterButton;
     private JFrame mainFrame;
 
     public IndexGUI(){
