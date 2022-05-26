@@ -6,15 +6,14 @@ import java.awt.event.ActionListener;
 public class IndexGUI extends JFrame {
     private JPanel panel1;
     private JButton loginButton;
-    private JButton registerButton;
+    private JButton memberListButton;
     private JButton bookingButton;
     private JButton paymentButton;
     private JButton feedbackButton;
     private JButton sessionsButton;
     private JButton logoutButton;
     private JLabel nameLabel;
-    private JButton customersButton;
-    private JButton cusRegisterButton;
+    private JButton staffListButton;
     private JFrame mainFrame;
 
     public IndexGUI(){
@@ -35,6 +34,8 @@ public class IndexGUI extends JFrame {
         paymentButton.setEnabled(false);
         feedbackButton.setEnabled(false);
         sessionsButton.setEnabled(false);
+        memberListButton.setEnabled(false);
+        staffListButton.setEnabled(false);
 
         loginButton.addActionListener(new ActionListener() {
             @Override
@@ -44,20 +45,6 @@ public class IndexGUI extends JFrame {
             }
         });
 
-        registerButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                RegisterGUI rg = new RegisterGUI();
-                mainFrame.dispose();
-            }
-        });
-        customersButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                staffListGUI sl = new staffListGUI();
-                mainFrame.dispose();
-            }
-        });
     }
 
     public IndexGUI(String username){
@@ -75,13 +62,24 @@ public class IndexGUI extends JFrame {
         nameLabel.setText(username);
 
         loginButton.setVisible(false);
-        registerButton.setVisible(false);
 
         logoutButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int x = JOptionPane.showConfirmDialog(mainFrame, "Are you sure you want to log out?","Confirm",JOptionPane.YES_NO_OPTION);
                 if (x==0){  mainFrame.dispose(); new IndexGUI(); }
+            }
+        });
+        memberListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        staffListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                staffListGUI sl = new staffListGUI(username);
+                mainFrame.dispose();
             }
         });
     }

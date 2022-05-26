@@ -46,8 +46,6 @@ public class LoginGUI extends JFrame {
                     JOptionPane.showMessageDialog(loginFrame, "Login Successful\r\nWelcome back," + username);
                     loginFrame.dispose();
                     IndexGUI indexGUI = new IndexGUI(username); }
-                else {
-                    System.out.println("Login failed"); }
             }
         });
     }

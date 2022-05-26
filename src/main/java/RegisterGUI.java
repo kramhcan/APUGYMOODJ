@@ -23,8 +23,10 @@ public class RegisterGUI extends JFrame {
     private JButton registerButton;
     private JRadioButton staffRadioButton;
     private JRadioButton trainerRadioButton;
+    private JTextField txtIC;
     private JFrame registerFrame;
 
+    String IC = "";
     String username = "";
     String password = "";
     String firstName = "";
@@ -36,7 +38,7 @@ public class RegisterGUI extends JFrame {
     String eType = "";
     String DOB = "";
 
-    public RegisterGUI(){
+    public RegisterGUI(String usernameInput){
         
         registerFrame = new JFrame("Register");
         registerFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -52,7 +54,7 @@ public class RegisterGUI extends JFrame {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                IndexGUI ig = new IndexGUI();
+                staffListGUI ig = new staffListGUI(usernameInput);
                 registerFrame.dispose();
             }
         });
@@ -62,6 +64,7 @@ public class RegisterGUI extends JFrame {
 
                 username = usernameTxt.getText();
                 password = String.valueOf(passwordTxt.getPassword());
+                IC = txtIC.getText();
                 firstName = firstNameTxt.getText();
                 lastName = lastNameTxt.getText();
                 address = addressTxt.getText();
@@ -74,16 +77,33 @@ public class RegisterGUI extends JFrame {
                 else if(staffRadioButton.isSelected()){ eType = "Staff";}
                 else { eType = ""; }
                 DOB = datePicker.getText();
-                String[] input = {username,password,firstName,lastName,address,contNumber,email,gender,eType,DOB};
-                String[] fieldNames = {"Username","Password","First Name","Last Name","Address","Contact","E-mail","Gender","User Type","DOB"};
+
+                String[] input = {username,password,IC,firstName,lastName,address,contNumber,email,gender,eType,DOB};
+                String[] fieldNames = {"Username","Password","IC","First Name","Last Name","Address","Contact","E-mail","Gender","User Type","DOB"};
 
                 ReadWrite rw = new ReadWrite();
                 Functions fn = new Functions();
-                if(fn.checkMissingInput(input, fieldNames, registerFrame) != true){
-                    if(rw.existingStaffUser(input, registerFrame) != true) {
-                        rw.RegisterStaff(input);
-                        JOptionPane.showMessageDialog(registerFrame, "New staff successfully registered");}
-                }
+
+                if(!fn.validateEmail(input[7])){  JOptionPane.showMessageDialog(registerFrame,"Invalid email format");
+                    return;  }
+                if(!fn.validateContact(input[6])){  JOptionPane.showMessageDialog(registerFrame,"Invalid Contact Number");
+                    return;  }
+                if(!fn.generalValidation(input[1]) || !fn.generalValidation(input[2]) || !fn.generalValidation(input[3]) || !fn.generalValidation(input[4]) || !fn.generalValidation(input[5])){
+                    JOptionPane.showMessageDialog(registerFrame,"Invalid text format");
+                    return; }
+                if(fn.checkMissingInput(input, fieldNames, registerFrame)) {
+                    return; }
+                if(rw.existingStaffUser(input, registerFrame)) {
+                    return; }
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.NO_OPTION) {
+                    return; }
+
+                input[5] = fn.addressReplace(input[5]);
+
+                rw.RegisterStaff(input);
+                JOptionPane.showMessageDialog(registerFrame, "New staff successfully registered");
+
             }
         });
 
