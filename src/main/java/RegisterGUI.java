@@ -62,23 +62,7 @@ public class RegisterGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                username = usernameTxt.getText();
-                password = String.valueOf(passwordTxt.getPassword());
-                IC = txtIC.getText();
-                firstName = firstNameTxt.getText();
-                lastName = lastNameTxt.getText();
-                address = addressTxt.getText();
-                contNumber = contactTxt.getText();
-                email = emailTxt.getText();
-                if(maleRadioButton.isSelected()){ gender = "Male";}
-                else if(femaleRadioButton.isSelected()){ gender = "Female";}
-                else { gender = ""; }
-                if(trainerRadioButton.isSelected()){ eType = "Trainer";}
-                else if(staffRadioButton.isSelected()){ eType = "Staff";}
-                else { eType = ""; }
-                DOB = datePicker.getText();
-
-                String[] input = {username,password,IC,firstName,lastName,address,contNumber,email,gender,eType,DOB};
+                String[] input = getTextField();
                 String[] fieldNames = {"Username","Password","IC","First Name","Last Name","Address","Contact","E-mail","Gender","User Type","DOB"};
 
                 ReadWrite rw = new ReadWrite();
@@ -107,5 +91,27 @@ public class RegisterGUI extends JFrame {
             }
         });
 
+    }
+
+    private String[] getTextField(){
+        username = usernameTxt.getText();
+        password = String.valueOf(passwordTxt.getPassword());
+        IC = txtIC.getText();
+        firstName = firstNameTxt.getText();
+        lastName = lastNameTxt.getText();
+        address = addressTxt.getText();
+        contNumber = contactTxt.getText();
+        email = emailTxt.getText();
+        if(maleRadioButton.isSelected()){ gender = "Male";}
+        else if(femaleRadioButton.isSelected()){ gender = "Female";}
+        else { gender = ""; }
+        if(trainerRadioButton.isSelected()){ eType = "Trainer";}
+        else if(staffRadioButton.isSelected()){ eType = "Staff";}
+        else { eType = ""; }
+        DOB = datePicker.getText();
+
+        String[] input = {username,password,IC,firstName,lastName,address,contNumber,email,gender,eType,DOB};
+
+        return input;
     }
 }

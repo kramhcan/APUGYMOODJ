@@ -45,6 +45,12 @@ public class IndexGUI extends JFrame {
             }
         });
 
+        memberListButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
     }
 
     public IndexGUI(String username){
@@ -73,6 +79,8 @@ public class IndexGUI extends JFrame {
         memberListButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                memberListGUI sl = new memberListGUI(username);
+                mainFrame.dispose();
             }
         });
         staffListButton.addActionListener(new ActionListener() {

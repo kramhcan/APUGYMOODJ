@@ -51,7 +51,7 @@ public class Functions {
         return matcher.find();
     }
     public String addressReplace(String input){
-        String str = input.replaceAll("[^a-zA-Z0-9 ]","");
+        String str = input.replaceAll("[^a-zA-Z0-9 /.]","");
         return str;
     }
 }

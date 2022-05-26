@@ -10,65 +10,11 @@ import java.util.*;
  */
 public class ReadWrite {
     int lastAcc;
+    String[] inputData;
 
-//    public void Reader() {
-//        Scanner x = new Scanner("C:\\Users\\markc\\IdeaProjects\\APUGYMOODJ\\src\\main\\resources\\ReadWrite.txt");
-//        boolean character;
-//        String out = "";
-//
-//        while ((character = x.hasNext()) != false) {
-//            out = x.next();
-//            System.out.print(out);
-//        }
-//        x.close();
-//    }
-
-//    public void Reader(String filepath) {
-//        try {
-//            FileReader reader = new FileReader(filepath);
-//            int character;
-//
-//            while ((character = reader.read()) != -1) {
-//                System.out.print((char) character);
-//            }
-//            reader.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    public void Writer(){
-//        //Test method
-//            try {
-//                String text = new String();
-//                text = "Testing";
-//                FileWriter fw = new FileWriter("C:\\Users\\markc\\IdeaProjects\\APUGYMOODJ\\src\\main\\resources\\ReadWrite.txt",true);
-//                BufferedWriter bw = new BufferedWriter(fw);
-//
-//                bw.write(text+","+text+"\r\n");
-//                bw.close();
-//
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-//    }
-
-//    public void Writer(String username, String password){
-//        try {
-////            String text = new String();
-////            text = "Testing";
-//            FileWriter fw = new FileWriter("C:\\Users\\markc\\IdeaProjects\\APUGYMOODJ\\src\\main\\resources\\ReadWrite.txt",true);
-//            BufferedWriter bw = new BufferedWriter(fw);
-//
-//            bw.write(username+","+password+"\r\n");
-//            bw.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
+    public void setInput(String[] input){
+        inputData = input;
+    }
 
     public boolean Login(String username,String password){
         try {
@@ -213,6 +159,50 @@ public class ReadWrite {
             PrintWriter pw = new PrintWriter(new FileOutputStream(file,false));
             pw.print(sb);
             pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    //Member/clients section
+    public boolean existingMember(JFrame frame){
+        try {
+            String recordIC = "";
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Staff.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[13];
+                data = s.split(",");
+                recordIC = data[0].toString();
+                if(recordIC.equals(inputData[0])){
+                    JOptionPane.showMessageDialog(frame, "User with same IC exists.");
+                    return true;  }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public void registerMember(){
+        try {
+
+            FileWriter fw = new FileWriter("src/main/resources/Member.txt",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[13];
+                data = s.split(",");
+                int i = Integer.parseInt(data[0]);
+                lastAcc = i;
+            }
+
+            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+",Enabled");
+            bw.close();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
