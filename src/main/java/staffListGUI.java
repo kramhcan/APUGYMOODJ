@@ -16,7 +16,7 @@ public class staffListGUI extends JFrame {
     JButton button = new JButton();
 
     public staffListGUI(String username){
-        staffFrame = new JFrame("Register");
+        staffFrame = new JFrame("Staff List");
         staffFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         staffFrame.setPreferredSize(new Dimension(1200, 500));
 //        staffFrame.setResizable(false);

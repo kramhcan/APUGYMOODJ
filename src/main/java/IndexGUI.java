@@ -14,6 +14,7 @@ public class IndexGUI extends JFrame {
     private JButton logoutButton;
     private JLabel nameLabel;
     private JButton staffListButton;
+    private JButton reportButton;
     private JFrame mainFrame;
 
     public IndexGUI(){
@@ -45,12 +46,6 @@ public class IndexGUI extends JFrame {
             }
         });
 
-        memberListButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
     }
 
     public IndexGUI(String username){
@@ -87,6 +82,14 @@ public class IndexGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 staffListGUI sl = new staffListGUI(username);
+                mainFrame.dispose();
+            }
+        });
+
+        sessionsButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SessionsGUI sg = new SessionsGUI(username);
                 mainFrame.dispose();
             }
         });

@@ -75,22 +75,6 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="ea11" class="javax.swing.JButton" binding="paymentButton" default-binding="true">
-            <constraints>
-              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Payment"/>
-            </properties>
-          </component>
-          <component id="41f48" class="javax.swing.JButton" binding="sessionsButton" default-binding="true">
-            <constraints>
-              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Sessions"/>
-            </properties>
-          </component>
           <component id="44315" class="javax.swing.JButton" binding="staffListButton">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -98,14 +82,6 @@
             <properties>
               <enabled value="true"/>
               <text value="Staff List"/>
-            </properties>
-          </component>
-          <component id="48733" class="javax.swing.JButton" binding="bookingButton" default-binding="true">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Booking"/>
             </properties>
           </component>
           <component id="75869" class="javax.swing.JButton" binding="feedbackButton" default-binding="true">
@@ -122,6 +98,30 @@
             </constraints>
             <properties>
               <text value="Member List"/>
+            </properties>
+          </component>
+          <component id="41f48" class="javax.swing.JButton" binding="sessionsButton" default-binding="true">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Sessions"/>
+            </properties>
+          </component>
+          <component id="ea11" class="javax.swing.JButton" binding="paymentButton" default-binding="true">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Payment"/>
+            </properties>
+          </component>
+          <component id="ed1d7" class="javax.swing.JButton" binding="reportButton">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Report"/>
             </properties>
           </component>
         </children>

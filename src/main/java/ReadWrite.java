@@ -1,9 +1,13 @@
+import org.apache.commons.lang3.ArrayUtils;
+
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.io.*;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Class with methods involving file reading
@@ -16,6 +20,7 @@ public class ReadWrite {
         inputData = input;
     }
 
+    //<editor-fold desc="Staff read write methods">
     public boolean Login(String username,String password){
         try {
             String recordUsername = ""; String recordPassword = ""; String staffStatus = "";
@@ -117,7 +122,7 @@ public class ReadWrite {
         return null;
     }
 
-    public String[] getUserData(String uID){
+    public String[] getStaffData(String uID){
         try {
             String recordID = "";
 
@@ -163,8 +168,9 @@ public class ReadWrite {
             e.printStackTrace();
         }
     }
+    //</editor-fold>
 
-    //Member/clients section
+    //<editor-fold desc="Member read write methods">
     public boolean existingMember(JFrame frame){
         try {
             String recordIC = "";
@@ -207,4 +213,262 @@ public class ReadWrite {
             e.printStackTrace();
         }
     }
+
+    public Object[][] memberTableData(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            Path path = Path.of("src/main/resources/Member.txt");
+            int lines = (int) Files.lines(path).count();
+
+            Object dataMulti[][]= new Object[lines][10];
+            Object dataSingle[] = new Object[13];
+
+            int r = 0;
+            while ((s=br.readLine()) != null){
+                dataSingle = s.split(",");
+                for(int i = 0; i<10; i++){
+                    dataMulti[r][i] = dataSingle[i];
+                }
+                r++;
+            }
+            return dataMulti;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getMemberData(String uID){
+        try {
+            String recordID = "";
+
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[13];
+                data = s.split(",");
+                recordID = data[0].toString();
+                if(recordID.equals(uID)){ return data; }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void updateMemberInfo(){
+        try {
+            String recordID = "";
+            StringBuffer sb = new StringBuffer();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String row;
+                String data[] = new String[13];
+                data = s.split(",");
+                recordID = data[0].toString();
+                if(recordID.equals(inputData[0])){
+                    row = inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+","+inputData[9];
+                } else {
+                    row = s;
+                }
+                sb.append(row); sb.append("\r\n");
+            }
+//            System.out.println(sb);
+            File file = new File("src/main/resources/Member.txt");
+            PrintWriter pw = new PrintWriter(new FileOutputStream(file,false));
+            pw.print(sb);
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    //</editor-fold>
+
+    //<editor-fold desc="Read Write methods for sessions">
+    /**
+     * SELECT [UID] FROM Staff
+     * WHERE EType = 'Trainer';
+     **/
+    public String[] getTrainerIDs(){
+        try {
+            String trainerCheck = "Trainer";
+            ArrayList<Object> idList = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Staff.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[13];
+                data = s.split(",");
+                if(trainerCheck.equals(data[10])){
+                    idList.add(data[0]+" ; "+data[3]+" "+data[4]);   }
+            }
+            Object[] idArray = idList.toArray();
+            String[] res = Arrays.copyOf(idArray, idArray.length, String[].class);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getMemberIDs(){
+        try {
+            ArrayList<Object> idList = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[9];
+                data = s.split(",");
+                idList.add(data[0]+" ; "+data[2]+" "+data[3]);
+            }
+            Object[] idArray = idList.toArray();
+            String[] res = Arrays.copyOf(idArray, idArray.length, String[].class);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * SELECT Sessions.*, Member.First_Name, Staff.First_Name FROM Sessions
+     * Left Join Sessions.Member_ID = Member.ID and Sessions.Trainer_ID = Trainer_Name;
+     */
+    public Object[][] sessionsTableData(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            String mName = "";
+            Path path = Path.of("src/main/resources/Sessions.txt");
+            int lines = (int) Files.lines(path).count();
+
+            Object dataMulti[][]= new Object[lines][8];
+            Object dataSingle[] = new Object[13];
+
+            int r = 0;
+            while ((s=br.readLine()) != null){
+                dataSingle = s.split(",");
+                for(int i = 0; i<8; i++){
+                    dataMulti[r][i] = dataSingle[i];
+                }
+                r++;
+            }
+            return dataMulti;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public Object[][] sessionsTableDataByTrainer(String TrainerID){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            Path path = Path.of("src/main/resources/Sessions.txt");
+
+            int idCount = CheckNumberOfLines(TrainerID);
+            int lines = (int) Files.lines(path).count();
+            int t = 0;
+
+            Object dataMulti[][]= new Object[lines][8];
+            Object dataSingle[] = new Object[13];
+
+            int r = 0;
+            while ((s=br.readLine()) != null){
+                dataSingle = s.split(",");
+                if(dataSingle[3].equals(TrainerID)){
+                    t++;
+                    for(int i = 0; i<8; i++){
+                        dataMulti[t][i] = dataSingle[i];
+                    }
+                }
+                r++;
+            }
+            return dataMulti;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public int CheckNumberOfLines(String TrainerID){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            int result = 0;
+            int r = 0;
+            while ((s=br.readLine()) != null){
+                String[] data = new String[8];
+                data = s.split(",");
+                if(data[3].equals(TrainerID)){
+                    result ++;
+                }
+                r++;
+            }
+            System.out.println(result);
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+    public int[] calculateAvailableTime(String trainerID, String Date){
+        try{
+            int[] time = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            List<Integer> takenHourList = new ArrayList<>();
+
+            while ((s=br.readLine()) != null){
+                String[] data = new String[8];
+                data = s.split(",");
+                if(!trainerID.equals(data[3])){ continue; }
+                if(!Date.equals(data[5])){ continue; }
+                String rowTime = data[7];
+                int rowTimeInt = Integer.parseInt(rowTime.substring(0, 2));
+                int durationInt = Integer.parseInt(data[6]);
+                for(int i = 0; i<durationInt; i++){
+                    int takenHour = rowTimeInt+i;
+                    takenHourList.add(takenHour);
+                }
+                int[] takenHourArray = takenHourList.stream().mapToInt(i->i).toArray();
+                for(int i = 0; i < takenHourArray.length; i++ ){
+                    int index = takenHourArray[i] - i;
+                    time = ArrayUtils.remove(time, index);
+                }
+                System.out.println(Arrays.toString(time));
+                return time;
+            }
+            return time;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //</editor-fold>
+    public void newSession(){
+        try {
+
+            FileWriter fw = new FileWriter("src/main/resources/Sessions.txt",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[13];
+                data = s.split(",");
+                int i = Integer.parseInt(data[0]);
+                lastAcc = i;
+            }
+
+            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]);
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

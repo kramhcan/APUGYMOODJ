@@ -26,6 +26,11 @@ public class memberListGUI extends JFrame {
         memberFrame.setLocationRelativeTo(null);
         memberFrame.setVisible(true);
 
+        ReadWrite rw = new ReadWrite();
+        Functions fn = new Functions();
+
+        createTable(rw.memberTableData());
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -40,17 +45,28 @@ public class memberListGUI extends JFrame {
                 memberFrame.dispose();
             }
         });
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event)
+            {
+                int column = 0;
+                int row = memberTable.getSelectedRow();
+                String uID = memberTable.getModel().getValueAt(row, column).toString();
+                MemberProfileEditGUI spEdit = new MemberProfileEditGUI(uID, username);
+                memberFrame.dispose();
+            }
+        });
     }
     private void createTable(Object [] [] data){
         memberTable.setModel(new DefaultTableModel(
                 data,
-                new String[]{"ID","First Name","IC","Last Name","Address","Contact Number","E-mail","Gender","DOB","User Type","Status","Button"}
+                new String[]{"ID","IC","First Name","Last Name","Address","Contact Number","E-mail","Gender","DOB","Status",""}
         ));
         TableColumnModel columns = memberTable.getColumnModel();
         columns.getColumn(4).setMinWidth(150);
         columns.getColumn(5).setMinWidth(100);
-        memberTable.getColumn("Button").setCellRenderer(new ButtonRenderer());
-        memberTable.getColumn("Button").setCellEditor(new ButtonEditor(new JCheckBox()));
+        memberTable.getColumn("").setCellRenderer(new ButtonRenderer());
+        memberTable.getColumn("").setCellEditor(new ButtonEditor(new JCheckBox()));
     }
 
 

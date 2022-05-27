@@ -1,11 +1,7 @@
-import org.apache.commons.validator.Validator;
-import org.apache.commons.validator.routines.EmailValidator;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Arrays;
 
 public class staffProfileEdit extends JFrame{
     private JPanel panel1;
@@ -24,8 +20,11 @@ public class staffProfileEdit extends JFrame{
     private JFrame staffEditFrame;
     String[] userData;
 
+    ReadWrite rw = new ReadWrite();
+    Functions fn = new Functions();
+
     public staffProfileEdit(String UID,String username){
-        staffEditFrame = new JFrame("Register");
+        staffEditFrame = new JFrame("Edit Staff");
         staffEditFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         staffEditFrame.setPreferredSize(new Dimension(500, 600));
         staffEditFrame.setResizable(false);
@@ -39,9 +38,6 @@ public class staffProfileEdit extends JFrame{
         cbStatus.addItem("Enabled"); cbStatus.addItem("Disabled");
         cbStatus.setSelectedItem("Enabled");
 
-        ReadWrite rw = new ReadWrite();
-        Functions fn = new Functions();
-
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,19 +47,7 @@ public class staffProfileEdit extends JFrame{
         });
 
         //Data from text file
-        userData = rw.getUserData(UID);
-
-        txtUID.setText(userData[0]);
-        txtUsername.setText(userData[1]);
-        txtPassword.setText(userData[2]);
-        txtIC.setText(userData[3]);
-        txtFirstName.setText(userData[4]);
-        txtLastName.setText(userData[5]);
-        txtAddress.setText(userData[6]);
-        txtContact.setText(userData[7]);
-        txtEmail.setText(userData[8]);
-        if(userData[12].equals("Enabled") || userData[12].equals("Disabled")){
-            cbStatus.setSelectedItem(userData[12]); }
+        SetTextField(UID);
 
         confirmButton.addActionListener(new ActionListener() {
             @Override
@@ -86,5 +70,21 @@ public class staffProfileEdit extends JFrame{
             }
         });
 
+    }
+
+    public void SetTextField(String UID){
+        userData = rw.getStaffData(UID);
+
+        txtUID.setText(userData[0]);
+        txtUsername.setText(userData[1]);
+        txtPassword.setText(userData[2]);
+        txtIC.setText(userData[3]);
+        txtFirstName.setText(userData[4]);
+        txtLastName.setText(userData[5]);
+        txtAddress.setText(userData[6]);
+        txtContact.setText(userData[7]);
+        txtEmail.setText(userData[8]);
+        if(userData[12].equals("Enabled") || userData[12].equals("Disabled")){
+            cbStatus.setSelectedItem(userData[12]); }
     }
 }

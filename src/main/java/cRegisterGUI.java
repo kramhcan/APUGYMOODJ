@@ -30,7 +30,7 @@ public class cRegisterGUI extends JFrame{
     String DOB = "";
 
     public cRegisterGUI(String username){
-        cRegisterFrame = new JFrame("Register");
+        cRegisterFrame = new JFrame("New Member");
         cRegisterFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         cRegisterFrame.setPreferredSize(new Dimension(500, 500));
         cRegisterFrame.setResizable(false);

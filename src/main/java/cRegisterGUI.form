@@ -132,7 +132,7 @@
             </constraints>
             <properties>
               <foreground color="-1"/>
-              <text value="Status"/>
+              <text value="Gender"/>
             </properties>
           </component>
         </children>
