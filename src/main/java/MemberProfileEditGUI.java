@@ -20,6 +20,7 @@ public class MemberProfileEditGUI extends JFrame {
     private JTextField txtID;
     private JPanel memberEditPanel;
     private JComboBox cbStatus;
+    private JComboBox cbPackage;
     private ButtonGroup buttonGroup1;
     private JFrame memberEditFrame;
     String[] userData;
@@ -63,7 +64,7 @@ public class MemberProfileEditGUI extends JFrame {
                     JOptionPane.showMessageDialog(memberEditFrame,"Invalid text format");
                     return; }
                 }
-                input[6] = fn.addressReplace(input[6]);
+                input[4] = fn.addressReplace(input[4]);
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
                     rw.updateMemberInfo();
@@ -81,6 +82,7 @@ public class MemberProfileEditGUI extends JFrame {
         String contNumber = txtContact.getText();
         String email = txtEmail.getText();
         String status = cbStatus.getSelectedItem().toString();
+        String pack = cbPackage.getSelectedItem().toString();
         String gender;
         String DOB;
         if(maleRadioButton.isSelected()){ gender = "Male";}
@@ -88,7 +90,7 @@ public class MemberProfileEditGUI extends JFrame {
         else { gender = ""; }
         DOB = dpDOB.getText();
 
-        String[] input = {UID,IC,firstName,lastName,address,contNumber,email,gender,DOB,status};
+        String[] input = {UID,IC,firstName,lastName,address,contNumber,email,gender,DOB,pack,status};
 
         return input;
     }
@@ -107,7 +109,8 @@ public class MemberProfileEditGUI extends JFrame {
         else if(userData[7].equals("Female")){ femaleRadioButton.setSelected(true); }
         else {  buttonGroup1.clearSelection();  }
         dpDOB.setText(userData[8]);
-        if(userData[9].equals("Enabled") || userData[9].equals("Disabled")){
-            cbStatus.setSelectedItem(userData[9]); }
+        cbPackage.setSelectedItem(userData[9]);
+        if(userData[10].equals("Enabled") || userData[10].equals("Disabled")){
+            cbStatus.setSelectedItem(userData[10]); }
     }
 }

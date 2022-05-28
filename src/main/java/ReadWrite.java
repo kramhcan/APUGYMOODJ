@@ -206,7 +206,7 @@ public class ReadWrite {
                 lastAcc = i;
             }
 
-            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+",Enabled");
+            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+",Disabled");
             bw.close();
 
         } catch (IOException e) {
@@ -221,13 +221,13 @@ public class ReadWrite {
             Path path = Path.of("src/main/resources/Member.txt");
             int lines = (int) Files.lines(path).count();
 
-            Object dataMulti[][]= new Object[lines][10];
+            Object dataMulti[][]= new Object[lines][11];
             Object dataSingle[] = new Object[13];
 
             int r = 0;
             while ((s=br.readLine()) != null){
                 dataSingle = s.split(",");
-                for(int i = 0; i<10; i++){
+                for(int i = 0; i<11; i++){
                     dataMulti[r][i] = dataSingle[i];
                 }
                 r++;
@@ -270,7 +270,7 @@ public class ReadWrite {
                 data = s.split(",");
                 recordID = data[0].toString();
                 if(recordID.equals(inputData[0])){
-                    row = inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+","+inputData[9];
+                    row = inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+","+inputData[9]+","+inputData[10];
                 } else {
                     row = s;
                 }
@@ -419,9 +419,10 @@ public class ReadWrite {
             int[] time = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
             String s="";
-            List<Integer> takenHourList = new ArrayList<>();
+            int r = 0;
 
             while ((s=br.readLine()) != null){
+                List<Integer> takenHourList = new ArrayList<>();
                 String[] data = new String[8];
                 data = s.split(",");
                 if(!trainerID.equals(data[3])){ continue; }
@@ -435,11 +436,11 @@ public class ReadWrite {
                 }
                 int[] takenHourArray = takenHourList.stream().mapToInt(i->i).toArray();
                 for(int i = 0; i < takenHourArray.length; i++ ){
-                    int index = takenHourArray[i] - i;
+                    int index = takenHourArray[i] - r;
                     time = ArrayUtils.remove(time, index);
+                    r++;
                 }
                 System.out.println(Arrays.toString(time));
-                return time;
             }
             return time;
         } catch (IOException e) {

@@ -45,7 +45,7 @@ public class Functions {
     }
 
     public boolean generalValidation(String input){
-        String conRegex = "^[a-zA-Z0-9 ]*$";
+        String conRegex = "^[a-zA-Z0-9 ()]*$";
         Pattern conPattern = Pattern.compile(conRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = conPattern.matcher(input);
         return matcher.find();

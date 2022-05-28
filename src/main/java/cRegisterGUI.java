@@ -18,6 +18,7 @@ public class cRegisterGUI extends JFrame{
     private JRadioButton maleRadioButton;
     private JRadioButton femaleRadioButton;
     private DatePicker dpDOB;
+    private JComboBox cbPackage;
     private JFrame cRegisterFrame;
 
     String IC = "";
@@ -28,6 +29,7 @@ public class cRegisterGUI extends JFrame{
     String email = "";
     String gender = "";
     String DOB = "";
+    String pack = "";
 
     public cRegisterGUI(String username){
         cRegisterFrame = new JFrame("New Member");
@@ -56,7 +58,7 @@ public class cRegisterGUI extends JFrame{
             public void actionPerformed(ActionEvent e) {
                 String[] input = getTextField();
                 rw.setInput(input);
-                String[] fieldNames = {"IC","First Name","Last Name","Address","Contact Number","E-mail","Gender","DOB"};
+                String[] fieldNames = {"IC","First Name","Last Name","Address","Contact Number","E-mail","Gender","DOB","Package Type"};
                 input[3] = fn.addressReplace(input[3]);
                 if(fn.checkMissingInput(input, fieldNames, cRegisterFrame)){
                     return; }
@@ -66,7 +68,7 @@ public class cRegisterGUI extends JFrame{
                     return;  }
                 if(!fn.validateContact(input[4])){  JOptionPane.showMessageDialog(cRegisterFrame,"Invalid Contact Number");
                     return;  }
-                for(int i = 0; i<8; i++){ if(!fn.generalValidation(input[i])){
+                for(int i = 0; i<9; i++){ if(!fn.generalValidation(input[i])){
                     if(i==3 || i==4 || i==5){ continue; }
                     JOptionPane.showMessageDialog(cRegisterFrame,"Invalid text format");
                     return; }
@@ -93,8 +95,10 @@ public class cRegisterGUI extends JFrame{
         else if(femaleRadioButton.isSelected()){ gender = "Female";}
         else { gender = ""; }
         DOB = dpDOB.getText();
+        pack = cbPackage.getSelectedItem().toString();
 
-        String[] input = {IC,firstName,lastName,address,contNumber,email,gender,DOB};
+
+        String[] input = {IC,firstName,lastName,address,contNumber,email,gender,DOB,pack};
 
         return input;
     }

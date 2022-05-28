@@ -60,7 +60,7 @@ public class memberListGUI extends JFrame {
     private void createTable(Object [] [] data){
         memberTable.setModel(new DefaultTableModel(
                 data,
-                new String[]{"ID","IC","First Name","Last Name","Address","Contact Number","E-mail","Gender","DOB","Status",""}
+                new String[]{"ID","IC","First Name","Last Name","Address","Contact Number","E-mail","Gender","DOB","Package Type","Status",""}
         ));
         TableColumnModel columns = memberTable.getColumnModel();
         columns.getColumn(4).setMinWidth(150);

@@ -34,9 +34,6 @@ public class NewSessionGUI extends JFrame{
         newSessionFrame.setLocationRelativeTo(null);
         newSessionFrame.setVisible(true);
 
-        ArrayList<DateChangeListener> listeners = dpSessionDate.getDateChangeListeners();
-        System.out.println(listeners);
-
         cbMemberID.addItem("Please Select");
         String[] memberID = rw.getMemberIDs();
         for(int i = 0; i < memberID.length; i ++){
@@ -45,13 +42,14 @@ public class NewSessionGUI extends JFrame{
         cbMemberID.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                if(cbMemberID.getSelectedItem().toString().equals("Please Select")){ return;    }
                 cbTrainerID.setEnabled(true);
                 String[] split = cbMemberID.getSelectedItem().toString().split(" ; ");
                 txtMemberName.setText(split[1]);
 
                 String[] trainerID = rw.getTrainerIDs();
-                for(int i = 0; i < trainerID.length; i ++){
-                    cbTrainerID.addItem(trainerID[i]);}
+                DefaultComboBoxModel mod = new DefaultComboBoxModel(trainerID);
+                cbTrainerID.setModel(mod);
             }
         });
         cbTrainerID.addActionListener(new ActionListener() {
@@ -124,6 +122,8 @@ public class NewSessionGUI extends JFrame{
         createButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.NO_OPTION) {return;}
                 String[] trainerInput = cbTrainerID.getSelectedItem().toString().split(" ; ");
                 String[] memberInput = cbMemberID.getSelectedItem().toString().split(" ; ");
                 String[] input = {trainerInput[0],txtMemberName.getText(),memberInput[0],txtTrainerName.getText(),dpSessionDate.getText(),cbDuration.getSelectedItem().toString(),cbAvailableTime.getSelectedItem().toString()};

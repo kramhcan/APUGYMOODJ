@@ -1,2 +1,4 @@
-1,010423101647,Mark,sus,7 Jalan USJ2/6D,0173221543,markchan0134gmail.com,Male,13 May 2022,Enabled
-2,0123456789,First,Last,Somewhere Out there,0173221543,mail@mail.com,Female,18 May 2022,Enabled
+1,010423101647,Mark,sus,7 Jalan USJ2/6D,0173221543,markchan0134gmail.com,Male,13 May 2022,PackageType,Enabled
+2,0123456789,First,Last,Somewhere Out there,0173221543,mail@mail.com,Female,18 May 2022,Normal(3 Months),Enabled
+3,012345678990,First,Last,ADdress address,0123456789,mail@mail.com,Male,19 May 2022,Normal(1 Month),Disabled
+4,123123123123,asss,LAST,adds,012345678990,email@mail.com,Male,19 May 2022,Student(1 Month),Disabled
