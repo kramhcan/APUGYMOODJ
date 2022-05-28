@@ -38,8 +38,8 @@ public class LoginGUI extends JFrame {
                 username = usernameField.getText();
                 password = String.valueOf(passwordField.getPassword());
 
-                ReadWrite readWrite = new ReadWrite();
-                boolean x = readWrite.Login(username, password);
+                Functions fn = new Functions();
+                boolean x = fn.Login(username, password);
 
                 if (x == true) {
                     System.out.println("Login successful");

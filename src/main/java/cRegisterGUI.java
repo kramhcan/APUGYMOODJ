@@ -43,7 +43,7 @@ public class cRegisterGUI extends JFrame{
         cRegisterFrame.setLocationRelativeTo(null);
         cRegisterFrame.setVisible(true);
 
-        ReadWrite rw = new ReadWrite();
+        
         Functions fn = new Functions();
 
         backButton.addActionListener(new ActionListener() {
@@ -57,12 +57,12 @@ public class cRegisterGUI extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[] input = getTextField();
-                rw.setInput(input);
+                fn.setInput(input);
                 String[] fieldNames = {"IC","First Name","Last Name","Address","Contact Number","E-mail","Gender","DOB","Package Type"};
                 input[3] = fn.addressReplace(input[3]);
                 if(fn.checkMissingInput(input, fieldNames, cRegisterFrame)){
                     return; }
-                if(rw.existingMember(cRegisterFrame)){
+                if(fn.existingMember(cRegisterFrame)){
                     return; }
                 if(!fn.validateEmail(input[5])){  JOptionPane.showMessageDialog(cRegisterFrame,"Invalid email format");
                     return;  }
@@ -78,7 +78,7 @@ public class cRegisterGUI extends JFrame{
                     return; }
 
 
-                rw.registerMember();
+                fn.registerMember();
                 JOptionPane.showMessageDialog(cRegisterFrame, "New member successfully registered");
 
             }

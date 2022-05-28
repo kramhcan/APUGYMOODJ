@@ -19,7 +19,7 @@ public class PaymentGUI extends JFrame {
     private JButton OKMemberButton;
     private JFrame paymentFrame;
 
-    ReadWrite rw = new ReadWrite();
+    Functions fn = new Functions();
 
     public PaymentGUI(String username){
         paymentFrame = new JFrame("Payment Page");
@@ -47,7 +47,7 @@ public class PaymentGUI extends JFrame {
                     sessionsPanel.setVisible(false);
                     membershipPanel.setVisible(true);
 
-                    String[] memberID = rw.getMemberIDs(true);
+                    String[] memberID = fn.getMemberIDs(true);
                     DefaultComboBoxModel modMember = new DefaultComboBoxModel(memberID);
                     cbMemberID.setModel(modMember);
                     return;
@@ -56,7 +56,7 @@ public class PaymentGUI extends JFrame {
                     membershipPanel.setVisible(false);
                     sessionsPanel.setVisible(true);
 
-                    String[] sessionID = rw.getSessionId();
+                    String[] sessionID = fn.getSessionId();
                     DefaultComboBoxModel modSession = new DefaultComboBoxModel(sessionID);
                     cbSessionID.setModel(modSession);
                     return;
@@ -74,7 +74,7 @@ public class PaymentGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[] split = cbMemberID.getSelectedItem().toString().split(" ; ");
-                String pack = rw.getMemberPackageByID(split[0]);
+                String pack = fn.getMemberPackageByID(split[0]);
                 txtPackage.setText(pack);
 
                 if(pack.equals("Normal(1 Month)")){txtCostMember.setText("100");
@@ -97,7 +97,7 @@ public class PaymentGUI extends JFrame {
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.NO_OPTION) {return;}
                 String[] split = cbMemberID.getSelectedItem().toString().split(" ; ");
-                rw.enableMember(split[0]);
+                fn.enableMember(split[0]);
                 memberListGUI sg = new memberListGUI(username);
                 paymentFrame.dispose();
             }
@@ -105,7 +105,7 @@ public class PaymentGUI extends JFrame {
         cbSessionID.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String duration = rw.getSessionDurationByID(cbSessionID.getSelectedItem().toString());
+                String duration = fn.getSessionDurationByID(cbSessionID.getSelectedItem().toString());
                 txtDuration.setText(duration);
 
                 if(duration.equals("1")){txtCostSession.setText("100");
@@ -126,7 +126,7 @@ public class PaymentGUI extends JFrame {
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.NO_OPTION) {return;}
                 String sessionID = cbSessionID.getSelectedItem().toString();
-                rw.setSessionPaid(sessionID);
+                fn.setSessionPaid(sessionID);
                 SessionsGUI sg = new SessionsGUI(username);
                 paymentFrame.dispose();
             }

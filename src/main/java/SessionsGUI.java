@@ -16,7 +16,7 @@ public class SessionsGUI extends JFrame{
     private JFrame sessionsFrame;
     JButton button = new JButton();
 
-    ReadWrite rw = new ReadWrite();
+    Functions fn = new Functions();
 
     public SessionsGUI(String username){
         sessionsFrame = new JFrame("Sessions List");
@@ -37,11 +37,11 @@ public class SessionsGUI extends JFrame{
                 sessionsFrame.dispose();
             }
         });
-//        String[] cbItems = rw.getTrainerIDs();
+//        String[] cbItems = fn.getTrainerIDs();
 //        cbTrainerId.addItem("Please Select");
 //        for(int i = 0; i < cbItems.length; i ++){   cbTrainerId.addItem(cbItems[i]);    }
 
-        Object[][] tableData = rw.sessionsTableData();
+        Object[][] tableData = fn.sessionsTableData();
         createTable(tableData);
 
         button.addActionListener(new ActionListener() {
@@ -53,7 +53,7 @@ public class SessionsGUI extends JFrame{
                 String uID = sessionsTable.getModel().getValueAt(row, column).toString();
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    rw.cancelSession(uID);
+                    fn.cancelSession(uID);
                     SessionsGUI sg = new SessionsGUI(username);
                     sessionsFrame.dispose();
                 }

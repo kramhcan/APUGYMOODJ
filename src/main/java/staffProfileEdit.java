@@ -20,7 +20,7 @@ public class staffProfileEdit extends JFrame{
     private JFrame staffEditFrame;
     String[] userData;
 
-    ReadWrite rw = new ReadWrite();
+    
     Functions fn = new Functions();
 
     public staffProfileEdit(String UID,String username){
@@ -64,7 +64,7 @@ public class staffProfileEdit extends JFrame{
                 input[6] = fn.addressReplace(input[6]);
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    rw.updateStaffInfo(input);
+                    fn.updateStaffInfo(input);
                     staffListGUI sl = new staffListGUI(username);
                     staffEditFrame.dispose();}
             }
@@ -73,7 +73,7 @@ public class staffProfileEdit extends JFrame{
     }
 
     public void SetTextField(String UID){
-        userData = rw.getStaffData(UID);
+        userData = fn.getStaffData(UID);
 
         txtUID.setText(userData[0]);
         txtUsername.setText(userData[1]);

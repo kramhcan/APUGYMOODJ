@@ -65,8 +65,10 @@ public class RegisterGUI extends JFrame {
                 String[] input = getTextField();
                 String[] fieldNames = {"Username","Password","IC","First Name","Last Name","Address","Contact","E-mail","Gender","User Type","DOB"};
 
-                ReadWrite rw = new ReadWrite();
                 Functions fn = new Functions();
+
+                ReadWrite read;
+                read = (ReadWrite) new Functions();
 
                 if(!fn.validateEmail(input[7])){  JOptionPane.showMessageDialog(registerFrame,"Invalid email format");
                     return;  }
@@ -77,7 +79,7 @@ public class RegisterGUI extends JFrame {
                     return; }
                 if(fn.checkMissingInput(input, fieldNames, registerFrame)) {
                     return; }
-                if(rw.existingStaffUser(input, registerFrame)) {
+                if(fn.existingStaffUser(input, registerFrame)) {
                     return; }
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.NO_OPTION) {
@@ -85,7 +87,7 @@ public class RegisterGUI extends JFrame {
 
                 input[5] = fn.addressReplace(input[5]);
 
-                rw.RegisterStaff(input);
+                fn.RegisterStaff(input);
                 JOptionPane.showMessageDialog(registerFrame, "New staff successfully registered");
 
             }

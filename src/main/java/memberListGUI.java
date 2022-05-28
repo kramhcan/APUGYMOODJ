@@ -26,10 +26,10 @@ public class memberListGUI extends JFrame {
         memberFrame.setLocationRelativeTo(null);
         memberFrame.setVisible(true);
 
-        ReadWrite rw = new ReadWrite();
+        
         Functions fn = new Functions();
 
-        createTable(rw.memberTableData());
+        createTable(fn.memberTableData());
 
         backButton.addActionListener(new ActionListener() {
             @Override

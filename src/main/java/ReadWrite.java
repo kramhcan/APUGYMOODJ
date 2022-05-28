@@ -8,13 +8,15 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
- * Class with methods involving file reading
+ * Abstract class with methods involving file reading
  */
-public class ReadWrite {
-    int lastAcc;
-    String[] inputData;
+abstract class ReadWrite{
+    private int lastAcc;
+    private String[] inputData;
 
     public void setInput(String[] input){
         inputData = input;
@@ -147,6 +149,7 @@ public class ReadWrite {
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Staff.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[13];
@@ -157,7 +160,9 @@ public class ReadWrite {
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Staff.txt");
@@ -206,14 +211,14 @@ public class ReadWrite {
                 lastAcc = i;
             }
 
-            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+",Disabled");
+            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","
+                    +inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+",Disabled");
             bw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public Object[][] memberTableData(){
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
@@ -264,6 +269,7 @@ public class ReadWrite {
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[13];
@@ -274,7 +280,9 @@ public class ReadWrite {
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Member.txt");
@@ -285,12 +293,14 @@ public class ReadWrite {
             e.printStackTrace();
         }
     }
+
     public void enableMember(String ID){
         try {
             String recordID = "";
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[11];
@@ -301,7 +311,9 @@ public class ReadWrite {
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Member.txt");
@@ -312,6 +324,7 @@ public class ReadWrite {
             e.printStackTrace();
         }
     }
+
     public String[] getMemberIDs(){
         try {
             ArrayList<Object> idList = new ArrayList<>();
@@ -330,6 +343,7 @@ public class ReadWrite {
         }
         return null;
     }
+
     public String[] getMemberIDs(Boolean byDisabled){
         try {
             ArrayList<Object> idList = new ArrayList<>();
@@ -349,6 +363,7 @@ public class ReadWrite {
         }
         return null;
     }
+
     public String getMemberPackageByID(String ID){
         try {
             String pack = "";
@@ -401,6 +416,7 @@ public class ReadWrite {
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[10];
@@ -411,7 +427,9 @@ public class ReadWrite {
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Sessions.txt");
@@ -429,6 +447,7 @@ public class ReadWrite {
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[10];
@@ -439,7 +458,9 @@ public class ReadWrite {
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Sessions.txt");
@@ -520,7 +541,7 @@ public class ReadWrite {
             int lines = (int) Files.lines(path).count();
             int t = 0;
 
-            Object dataMulti[][]= new Object[lines][9];
+            Object dataMulti[][]= new Object[lines][10];
             Object dataSingle[] = new Object[13];
 
             int r = 0;
@@ -528,7 +549,7 @@ public class ReadWrite {
                 dataSingle = s.split(",");
                 if(dataSingle[3].equals(TrainerID)){
                     t++;
-                    for(int i = 0; i<9; i++){
+                    for(int i = 0; i<10; i++){
                         dataMulti[t][i] = dataSingle[i];
                     }
                 }
@@ -661,5 +682,9 @@ public class ReadWrite {
     }
     //</editor-fold>
 
+    public boolean validateEmail(String input){
+        System.out.println("To prove a point");
+        return false;
+    }
 
 }
