@@ -16,7 +16,7 @@ public class SessionsGUI extends JFrame{
     private JFrame sessionsFrame;
     JButton button = new JButton();
 
-    ReadWrite rw = new ReadWrite();
+    Functions rw = new Functions();
 
     public SessionsGUI(String username){
         sessionsFrame = new JFrame("Sessions List");

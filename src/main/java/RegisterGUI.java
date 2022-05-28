@@ -68,6 +68,9 @@ public class RegisterGUI extends JFrame {
                 ReadWrite rw = new ReadWrite();
                 Functions fn = new Functions();
 
+                ReadWrite read;
+                read = (ReadWrite) new Functions();
+
                 if(!fn.validateEmail(input[7])){  JOptionPane.showMessageDialog(registerFrame,"Invalid email format");
                     return;  }
                 if(!fn.validateContact(input[6])){  JOptionPane.showMessageDialog(registerFrame,"Invalid Contact Number");

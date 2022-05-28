@@ -8,7 +8,8 @@ import java.util.regex.Pattern;
 /**
  * Class with general functions/methods
  **/
-public class Functions {
+public class Functions extends ReadWrite{
+
     public boolean checkMissingInput(String[] input,String[] fieldName, JFrame frame){
         List<Integer> m = new ArrayList<>();
 
@@ -30,12 +31,15 @@ public class Functions {
         return false;
     }
 
+    //Generalization
+    @Override
     public boolean validateEmail(String input){
         String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
         Pattern emailPattern = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
         Matcher matcher = emailPattern.matcher(input);
         return matcher.find();
     }
+
 
     public boolean validateContact(String input){
         String conRegex = "^(01)[0-46-9]*[0-9]{7,8}$";
@@ -55,8 +59,5 @@ public class Functions {
         return str;
     }
 
-//    public void calculateAvailableTime(){
-//        int[] time = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24};
-//    }
 }
 

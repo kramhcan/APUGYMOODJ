@@ -8,13 +8,15 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Class with methods involving file reading
  */
-public class ReadWrite {
-    int lastAcc;
-    String[] inputData;
+public class ReadWrite{
+    private int lastAcc;
+    private String[] inputData;
 
     public void setInput(String[] input){
         inputData = input;
@@ -206,14 +208,14 @@ public class ReadWrite {
                 lastAcc = i;
             }
 
-            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+",Disabled");
+            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","
+                    +inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+","+inputData[7]+","+inputData[8]+",Disabled");
             bw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     public Object[][] memberTableData(){
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
@@ -285,6 +287,7 @@ public class ReadWrite {
             e.printStackTrace();
         }
     }
+
     public void enableMember(String ID){
         try {
             String recordID = "";
@@ -312,6 +315,7 @@ public class ReadWrite {
             e.printStackTrace();
         }
     }
+
     public String[] getMemberIDs(){
         try {
             ArrayList<Object> idList = new ArrayList<>();
@@ -330,6 +334,7 @@ public class ReadWrite {
         }
         return null;
     }
+
     public String[] getMemberIDs(Boolean byDisabled){
         try {
             ArrayList<Object> idList = new ArrayList<>();
@@ -349,6 +354,7 @@ public class ReadWrite {
         }
         return null;
     }
+
     public String getMemberPackageByID(String ID){
         try {
             String pack = "";
@@ -661,5 +667,9 @@ public class ReadWrite {
     }
     //</editor-fold>
 
+    public boolean validateEmail(String input){
+        System.out.println("To prove a point");
+        return false;
+    }
 
 }
