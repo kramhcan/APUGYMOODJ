@@ -51,8 +51,12 @@ public class SessionsGUI extends JFrame{
                 int column = 0;
                 int row = sessionsTable.getSelectedRow();
                 String uID = sessionsTable.getModel().getValueAt(row, column).toString();
-                staffProfileEdit spEdit = new staffProfileEdit(uID, username);
-                sessionsFrame.dispose();
+                int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
+                if (reply == JOptionPane.YES_OPTION) {
+                    rw.cancelSession(uID);
+                    SessionsGUI sg = new SessionsGUI(username);
+                    sessionsFrame.dispose();
+                }
             }
         });
 
@@ -67,7 +71,7 @@ public class SessionsGUI extends JFrame{
     }
 
     private void createTable(Object[][] data){
-        DefaultTableModel model = new DefaultTableModel(data, new String[]{"Session ID","Member ID","Member Name","Trainer ID","Trainer Name","Session Date","Session Duration(Hours)","Session Time",""});
+        DefaultTableModel model = new DefaultTableModel(data, new String[]{"Session ID","Member ID","Member Name","Trainer ID","Trainer Name","Session Date","Session Duration(Hours)","Session Time","Payment Status","Is Canceled",""});
         sessionsTable.setModel(model);
         TableColumnModel columns = sessionsTable.getColumnModel();
         sessionsTable.getColumn("").setCellRenderer(new ButtonRenderer());
@@ -78,7 +82,7 @@ public class SessionsGUI extends JFrame{
         filterButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String[] header = new String[]{"Session ID","Member ID","Member Name","Trainer ID","Trainer Name","Session Date","Session Duration(Hours)","Session Time",""};
+                String[] header = new String[]{"Session ID","Member ID","Member Name","Trainer ID","Trainer Name","Session Date","Session Duration(Hours)","Session Time","Payment Status","Payment Status",""};
                 int i = 0;
                 while(i<header.length){
                     if (cbFilter.getSelectedItem().toString().equals(header[i])){ break;}
@@ -103,7 +107,7 @@ public class SessionsGUI extends JFrame{
         }
         public Component getTableCellRendererComponent(JTable table, Object value,
                                                        boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "Modify" : value.toString());
+            setText((value == null) ? "Cancel" : value.toString());
             return this;
         }
     }
@@ -118,7 +122,7 @@ public class SessionsGUI extends JFrame{
         public Component getTableCellEditorComponent(JTable table, Object value,
                                                      boolean isSelected, int row, int column)
         {
-            label = (value == null) ? "Modify" : value.toString();
+            label = (value == null) ? "Cancel" : value.toString();
             button.setText(label);
             return button;
         }

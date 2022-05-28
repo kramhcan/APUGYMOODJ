@@ -129,6 +129,8 @@ public class NewSessionGUI extends JFrame{
                 String[] input = {trainerInput[0],txtMemberName.getText(),memberInput[0],txtTrainerName.getText(),dpSessionDate.getText(),cbDuration.getSelectedItem().toString(),cbAvailableTime.getSelectedItem().toString()};
                 rw.setInput(input);
                 rw.newSession();
+                SessionsGUI sg = new SessionsGUI(username);
+                newSessionFrame.dispose();
             }
         });
     }

@@ -93,5 +93,12 @@ public class IndexGUI extends JFrame {
                 mainFrame.dispose();
             }
         });
+        paymentButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                PaymentGUI pg = new PaymentGUI(username);
+                mainFrame.dispose();
+            }
+        });
     }
 }

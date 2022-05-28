@@ -285,6 +285,88 @@ public class ReadWrite {
             e.printStackTrace();
         }
     }
+    public void enableMember(String ID){
+        try {
+            String recordID = "";
+            StringBuffer sb = new StringBuffer();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String row;
+                String data[] = new String[11];
+                data = s.split(",");
+                recordID = data[0].toString();
+                if(recordID.equals(ID)){
+                    row = data[0]+","+data[1]+","+data[2]+","+data[3]+","+data[4]+","+data[5]+","+data[6]+","+data[7]+","+data[8]+","+data[9]+",Enabled";
+                } else {
+                    row = s;
+                }
+                sb.append(row); sb.append("\r\n");
+            }
+//            System.out.println(sb);
+            File file = new File("src/main/resources/Member.txt");
+            PrintWriter pw = new PrintWriter(new FileOutputStream(file,false));
+            pw.print(sb);
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public String[] getMemberIDs(){
+        try {
+            ArrayList<Object> idList = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[10];
+                data = s.split(",");
+                idList.add(data[0]+" ; "+data[2]+" "+data[3]);
+            }
+            Object[] idArray = idList.toArray();
+            String[] res = Arrays.copyOf(idArray, idArray.length, String[].class);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public String[] getMemberIDs(Boolean byDisabled){
+        try {
+            ArrayList<Object> idList = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[10];
+                data = s.split(",");
+                if(data[10].equals("Enabled")){continue;}
+                idList.add(data[0]+" ; "+data[2]+" "+data[3]);
+            }
+            Object[] idArray = idList.toArray();
+            String[] res = Arrays.copyOf(idArray, idArray.length, String[].class);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public String getMemberPackageByID(String ID){
+        try {
+            String pack = "";
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[9];
+                data = s.split(",");
+                if(data[0].equals(ID)) {
+                    pack = data[9];
+                }
+            }
+            return pack;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
     //</editor-fold>
 
     //<editor-fold desc="Read Write methods for sessions">
@@ -313,7 +395,63 @@ public class ReadWrite {
         return null;
     }
 
-    public String[] getMemberIDs(){
+    public void cancelSession(String ID){
+        try {
+            String recordID = "";
+            StringBuffer sb = new StringBuffer();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String row;
+                String data[] = new String[10];
+                data = s.split(",");
+                recordID = data[0].toString();
+                if(recordID.equals(ID)){
+                    row = data[0]+","+data[1]+","+data[2]+","+data[3]+","+data[4]+","+data[5]+","+data[6]+","+data[7]+","+data[8]+",1";
+                } else {
+                    row = s;
+                }
+                sb.append(row); sb.append("\r\n");
+            }
+//            System.out.println(sb);
+            File file = new File("src/main/resources/Sessions.txt");
+            PrintWriter pw = new PrintWriter(new FileOutputStream(file,false));
+            pw.print(sb);
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setSessionPaid(String ID){
+        try {
+            String recordID = "";
+            StringBuffer sb = new StringBuffer();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String row;
+                String data[] = new String[10];
+                data = s.split(",");
+                recordID = data[0].toString();
+                if(recordID.equals(ID)){
+                    row = data[0]+","+data[1]+","+data[2]+","+data[3]+","+data[4]+","+data[5]+","+data[6]+","+data[7]+",1,"+data[9];
+                } else {
+                    row = s;
+                }
+                sb.append(row); sb.append("\r\n");
+            }
+//            System.out.println(sb);
+            File file = new File("src/main/resources/Sessions.txt");
+            PrintWriter pw = new PrintWriter(new FileOutputStream(file,false));
+            pw.print(sb);
+            pw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String[] getMemberIDsWhereEnabled(){
         try {
             ArrayList<Object> idList = new ArrayList<>();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
@@ -344,13 +482,23 @@ public class ReadWrite {
             Path path = Path.of("src/main/resources/Sessions.txt");
             int lines = (int) Files.lines(path).count();
 
-            Object dataMulti[][]= new Object[lines][8];
+            Object dataMulti[][]= new Object[lines][10];
             Object dataSingle[] = new Object[13];
 
             int r = 0;
             while ((s=br.readLine()) != null){
                 dataSingle = s.split(",");
-                for(int i = 0; i<8; i++){
+                for(int i = 0; i<10; i++){
+                    if(i==8){
+                        if(dataSingle[i].equals("0")) {dataMulti[r][i] = "Unpaid";}
+                        if(dataSingle[i].equals("1")) {dataMulti[r][i] = "Paid";}
+                        continue;
+                    }
+                    if(i==9){
+                        if(dataSingle[i].equals("0")) {dataMulti[r][i] = "No";}
+                        if(dataSingle[i].equals("1")) {dataMulti[r][i] = "Yes";}
+                        continue;
+                    }
                     dataMulti[r][i] = dataSingle[i];
                 }
                 r++;
@@ -372,7 +520,7 @@ public class ReadWrite {
             int lines = (int) Files.lines(path).count();
             int t = 0;
 
-            Object dataMulti[][]= new Object[lines][8];
+            Object dataMulti[][]= new Object[lines][9];
             Object dataSingle[] = new Object[13];
 
             int r = 0;
@@ -380,7 +528,7 @@ public class ReadWrite {
                 dataSingle = s.split(",");
                 if(dataSingle[3].equals(TrainerID)){
                     t++;
-                    for(int i = 0; i<8; i++){
+                    for(int i = 0; i<9; i++){
                         dataMulti[t][i] = dataSingle[i];
                     }
                 }
@@ -400,7 +548,7 @@ public class ReadWrite {
             int result = 0;
             int r = 0;
             while ((s=br.readLine()) != null){
-                String[] data = new String[8];
+                String[] data = new String[10];
                 data = s.split(",");
                 if(data[3].equals(TrainerID)){
                     result ++;
@@ -423,10 +571,11 @@ public class ReadWrite {
 
             while ((s=br.readLine()) != null){
                 List<Integer> takenHourList = new ArrayList<>();
-                String[] data = new String[8];
+                String[] data = new String[10];
                 data = s.split(",");
                 if(!trainerID.equals(data[3])){ continue; }
                 if(!Date.equals(data[5])){ continue; }
+                if(data[9].equals("1")){ continue; }
                 String rowTime = data[7];
                 int rowTimeInt = Integer.parseInt(rowTime.substring(0, 2));
                 int durationInt = Integer.parseInt(data[6]);
@@ -448,7 +597,6 @@ public class ReadWrite {
         }
         return null;
     }
-    //</editor-fold>
     public void newSession(){
         try {
 
@@ -458,18 +606,60 @@ public class ReadWrite {
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
             String s="";
             while ((s=br.readLine()) != null){
-                String data[] = new String[13];
+                String data[] = new String[10];
                 data = s.split(",");
                 int i = Integer.parseInt(data[0]);
                 lastAcc = i;
             }
 
-            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]);
+            bw.write("\r\n"+(lastAcc+1)+","+inputData[0]+","+inputData[1]+","+inputData[2]+","+inputData[3]+","+inputData[4]+","+inputData[5]+","+inputData[6]+",0,0");
             bw.close();
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+    public String[] getSessionId(){
+        try {
+            ArrayList<Object> idList = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[10];
+                data = s.split(",");
+                if(data[8].equals("1")){ continue; }
+                if(data[9].equals("1")){ continue; }
+                if(data[0].equals("0")){ continue;}
+                idList.add(data[0]);
+            }
+            Object[] idArray = idList.toArray();
+            String[] res = Arrays.copyOf(idArray, idArray.length, String[].class);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String getSessionDurationByID(String ID){
+        try {
+            String duration = "";
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[10];
+                data = s.split(",");
+                if(data[0].equals(ID)) {
+                    duration = data[6];
+                }
+            }
+            return duration;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    //</editor-fold>
+
 
 }
