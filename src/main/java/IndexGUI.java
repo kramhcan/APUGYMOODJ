@@ -30,6 +30,7 @@ public class IndexGUI extends JFrame {
 
         logoutButton.setVisible(false);
 
+        reportButton.setEnabled(false);
         paymentButton.setEnabled(false);
         feedbackButton.setEnabled(false);
         sessionsButton.setEnabled(false);

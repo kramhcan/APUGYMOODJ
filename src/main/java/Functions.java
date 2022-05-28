@@ -31,7 +31,6 @@ public class Functions extends ReadWrite{
         return false;
     }
 
-    //Generalization
     @Override
     public boolean validateEmail(String input){
         String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";

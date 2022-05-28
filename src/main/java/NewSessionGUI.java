@@ -20,7 +20,7 @@ public class NewSessionGUI extends JFrame{
     private JButton createButton;
     private JFrame newSessionFrame;
 
-    ReadWrite rw = new ReadWrite();
+    Functions fn = new Functions();
 
     public NewSessionGUI(String username){
         newSessionFrame = new JFrame("New Session Booking");
@@ -35,7 +35,7 @@ public class NewSessionGUI extends JFrame{
         newSessionFrame.setVisible(true);
 
         cbMemberID.addItem("Please Select");
-        String[] memberID = rw.getMemberIDs();
+        String[] memberID = fn.getMemberIDs();
         for(int i = 0; i < memberID.length; i ++){
             cbMemberID.addItem(memberID[i]);
         }
@@ -47,7 +47,7 @@ public class NewSessionGUI extends JFrame{
                 String[] split = cbMemberID.getSelectedItem().toString().split(" ; ");
                 txtMemberName.setText(split[1]);
 
-                String[] trainerID = rw.getTrainerIDs();
+                String[] trainerID = fn.getTrainerIDs();
                 DefaultComboBoxModel mod = new DefaultComboBoxModel(trainerID);
                 cbTrainerID.setModel(mod);
             }
@@ -73,7 +73,7 @@ public class NewSessionGUI extends JFrame{
                 String date = dpSessionDate.getText();
                 String trainerID = cbTrainerID.getSelectedItem().toString();
                 if(date.isBlank()){ return; }
-                int[] availableHours = rw.calculateAvailableTime(trainerID, date);
+                int[] availableHours = fn.calculateAvailableTime(trainerID, date);
                 for(int i = 0; i<availableHours.length; i++){
                     String time = String.valueOf(availableHours[i]);
                     if(time.length() == 1){
@@ -92,7 +92,7 @@ public class NewSessionGUI extends JFrame{
                 String[] trainerID = cbTrainerID.getSelectedItem().toString().split(" ; ");
                 if(date.isBlank()){ return; }
                 if(trainerID[0].isBlank()){ return; }
-                int[] availableHoursInt = rw.calculateAvailableTime(trainerID[0], date);
+                int[] availableHoursInt = fn.calculateAvailableTime(trainerID[0], date);
                 String[] replace = new String[availableHoursInt.length];
                 for(int i = 0; i<availableHoursInt.length; i++){
                     if(String.valueOf(availableHoursInt[i]).length() == 1){
@@ -127,8 +127,8 @@ public class NewSessionGUI extends JFrame{
                 String[] trainerInput = cbTrainerID.getSelectedItem().toString().split(" ; ");
                 String[] memberInput = cbMemberID.getSelectedItem().toString().split(" ; ");
                 String[] input = {trainerInput[0],txtMemberName.getText(),memberInput[0],txtTrainerName.getText(),dpSessionDate.getText(),cbDuration.getSelectedItem().toString(),cbAvailableTime.getSelectedItem().toString()};
-                rw.setInput(input);
-                rw.newSession();
+                fn.setInput(input);
+                fn.newSession();
                 SessionsGUI sg = new SessionsGUI(username);
                 newSessionFrame.dispose();
             }

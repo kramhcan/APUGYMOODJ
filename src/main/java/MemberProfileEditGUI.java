@@ -25,7 +25,7 @@ public class MemberProfileEditGUI extends JFrame {
     private JFrame memberEditFrame;
     String[] userData;
 
-    ReadWrite rw = new ReadWrite();
+    
     Functions fn = new Functions();
 
     public MemberProfileEditGUI(String UID, String username){
@@ -54,7 +54,7 @@ public class MemberProfileEditGUI extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String[] input = getTextField();
-                rw.setInput(input);
+                fn.setInput(input);
                 if(!fn.validateEmail(input[6])){  JOptionPane.showMessageDialog(memberEditFrame,"Invalid email format");
                     return;  }
                 if(!fn.validateContact(input[5])){  JOptionPane.showMessageDialog(memberEditFrame,"Invalid Contact Number");
@@ -67,7 +67,7 @@ public class MemberProfileEditGUI extends JFrame {
                 input[4] = fn.addressReplace(input[4]);
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    rw.updateMemberInfo();
+                    fn.updateMemberInfo();
                     memberListGUI ml = new memberListGUI(username);
                     memberEditFrame.dispose();}
             }
@@ -96,7 +96,7 @@ public class MemberProfileEditGUI extends JFrame {
     }
 
     public void SetDataFields(String UID){
-        userData = rw.getMemberData(UID);
+        userData = fn.getMemberData(UID);
 
         txtID.setText(userData[0]);
         txtIC.setText(userData[1]);

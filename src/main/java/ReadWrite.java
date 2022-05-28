@@ -12,9 +12,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Class with methods involving file reading
+ * Abstract class with methods involving file reading
  */
-public class ReadWrite{
+abstract class ReadWrite{
     private int lastAcc;
     private String[] inputData;
 
@@ -149,6 +149,7 @@ public class ReadWrite{
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Staff.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[13];
@@ -159,7 +160,9 @@ public class ReadWrite{
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Staff.txt");
@@ -266,6 +269,7 @@ public class ReadWrite{
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[13];
@@ -276,7 +280,9 @@ public class ReadWrite{
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Member.txt");
@@ -294,6 +300,7 @@ public class ReadWrite{
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[11];
@@ -304,7 +311,9 @@ public class ReadWrite{
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Member.txt");
@@ -407,6 +416,7 @@ public class ReadWrite{
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[10];
@@ -417,7 +427,9 @@ public class ReadWrite{
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Sessions.txt");
@@ -435,6 +447,7 @@ public class ReadWrite{
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
             String s="";
+            int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
                 String data[] = new String[10];
@@ -445,7 +458,9 @@ public class ReadWrite{
                 } else {
                     row = s;
                 }
-                sb.append(row); sb.append("\r\n");
+                if(x!=0){ sb.append("\r\n"); }
+                sb.append(row);
+                x++;
             }
 //            System.out.println(sb);
             File file = new File("src/main/resources/Sessions.txt");
@@ -526,7 +541,7 @@ public class ReadWrite{
             int lines = (int) Files.lines(path).count();
             int t = 0;
 
-            Object dataMulti[][]= new Object[lines][9];
+            Object dataMulti[][]= new Object[lines][10];
             Object dataSingle[] = new Object[13];
 
             int r = 0;
@@ -534,7 +549,7 @@ public class ReadWrite{
                 dataSingle = s.split(",");
                 if(dataSingle[3].equals(TrainerID)){
                     t++;
-                    for(int i = 0; i<9; i++){
+                    for(int i = 0; i<10; i++){
                         dataMulti[t][i] = dataSingle[i];
                     }
                 }

@@ -27,8 +27,9 @@ public class staffListGUI extends JFrame {
         staffFrame.setLocationRelativeTo(null);
         staffFrame.setVisible(true);
 
-        ReadWrite rw = new ReadWrite();
-        Object[][] data = rw.staffTableData();
+        Functions fn = new Functions();
+
+        Object[][] data = fn.staffTableData();
         System.out.println(data.toString());
         createTable(data);
 
