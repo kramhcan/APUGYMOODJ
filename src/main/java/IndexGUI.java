@@ -99,5 +99,12 @@ public class IndexGUI extends JFrame {
                 mainFrame.dispose();
             }
         });
+        feedbackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Feedback pg = new Feedback(username);
+                mainFrame.dispose();
+            }
+        });
     }
 }

@@ -1,7 +1,6 @@
-0,MemberID,MemberName,StaffID,StaffName,Date,Duration,Time,Payment,Canceled
 1,MemberID,MemberName,1,StaffName,28 May 2022,2,0400,0,1
 2,MemberID,MemberName,2,StaffName,28 May 2022,3,0400,1,0
 3,1,Mark sus,1,Mark sus,28 May 2022,2,0600,1,0
 4,1,Mark sus,1,14 15,19 May 2022,2,1800,1,0
 5,1,First Last,2,14 15,20 May 2022,1,0300,0,1
-6,1,First Last,2,14 15,20 May 2022,5,0400,0,0
+6,1,First Last,2,14 15,20 May 2022,5,0400,0,1

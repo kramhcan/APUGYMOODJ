@@ -1,3 +1,4 @@
 0,USERNAME,PASSWORD,IC,FIRSTNAME,LASTNAME,ADDRESS,CONTNUMBER,EMAIL,GENDER,ETYPE,DOB,Enabled
-1,fukcyou,13,14,15,6,17,18,19,1,Trainer,1,Enabled
+1,test,test,14,15,6,17,18,19,1,Trainer,1,Enabled
 2,1231,die,nword,fuckyou,assss,asdasd1asdad12,0122273255,mail@mail.com,Male,Staff,20 May 2022,Enabled
+3,1,1,1,1,1,1,0166267114,kyle@gmail.com,Male,Staff,20 May 2022,Enabled
