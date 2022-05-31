@@ -2,7 +2,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import javax.swing.*;
 import java.io.*;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
@@ -10,8 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Objects;
 
 /**
  * Abstract class with methods involving file reading
@@ -221,6 +219,7 @@ abstract class ReadWrite{
             e.printStackTrace();
         }
     }
+
     public Object[][] memberTableData(){
         try {
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
@@ -343,6 +342,25 @@ abstract class ReadWrite{
                 String data[] = new String[10];
                 data = s.split(",");
                 idList.add(data[0]+" ; "+data[2]+" "+data[3]);
+            }
+            Object[] idArray = idList.toArray();
+            String[] res = Arrays.copyOf(idArray, idArray.length, String[].class);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getSessionID(){
+        try {
+            ArrayList<Object> idList = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[0];
+                data = s.split(",");
+                idList.add(data[0]);
             }
             Object[] idArray = idList.toArray();
             String[] res = Arrays.copyOf(idArray, idArray.length, String[].class);
@@ -595,6 +613,7 @@ abstract class ReadWrite{
         }
         return 0;
     }
+
     public int[] calculateAvailableTime(String trainerID, String Date){
         try{
             int[] time = {0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23};
@@ -630,6 +649,7 @@ abstract class ReadWrite{
         }
         return null;
     }
+
     public void newSession(){
         try {
 
@@ -652,6 +672,7 @@ abstract class ReadWrite{
             e.printStackTrace();
         }
     }
+
     public String[] getSessionId(){
         try {
             ArrayList<Object> idList = new ArrayList<>();
@@ -662,7 +683,7 @@ abstract class ReadWrite{
                 data = s.split(",");
                 if(data[8].equals("1")){ continue; }
                 if(data[9].equals("1")){ continue; }
-                if(data[0].equals("0")){ continue;}
+                if(data[0].equals("0")){ continue; }
                 idList.add(data[0]);
             }
             Object[] idArray = idList.toArray();
@@ -748,5 +769,91 @@ abstract class ReadWrite{
         }
         return null;
     }
+
+    public String getSessionDate(String sessionID) {
+        try {
+            String sessionDate = "";
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null) {
+                String data[] = new String[10];
+                data = s.split(",");
+                if (Objects.equals(data[0], sessionID)) {
+                    sessionDate = data[5];
+                }
+            }
+            return sessionDate;
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getTrainerName(String sessionID) {
+        try {
+            String sessionDetails[] = new String[2];
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null) {
+                String data[] = new String[10];
+                data = s.split(",");
+                if (Objects.equals(data[0], sessionID)) {
+                    sessionDetails[0] = data[3]; // Trainer ID
+                    sessionDetails[1] = data[4]; // Trainer Name
+
+                }
+            }
+            return sessionDetails;
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public String[] getClientName(String sessionID) {
+        try {
+            String clientDetails[] = new String[2];
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Sessions.txt"));
+            String s="";
+            while ((s=br.readLine()) != null) {
+                String data[] = new String[10];
+                data = s.split(",");
+                if (Objects.equals(data[0], sessionID)) {
+                    clientDetails[0] = data[1];
+                    clientDetails[1] = data[2];
+                }
+            }
+            return clientDetails;
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public void createFeedback(String[] input) {
+            try {
+                FileWriter fw = new FileWriter("src/main/resources/Feedback.txt", true);
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Feedback.txt"));
+                String s="";
+
+                while ((s=br.readLine()) != null) {
+                    String data[] = new String[8];
+                    data = s.split(",");
+                    int i = Integer.parseInt(data[0]);
+                    lastAcc = i;
+                }
+                bw.write("\r\n"+(lastAcc+1)+","+input[0]+","+input[1]+","+input[2]+","+input[3]+","+input[4]+","+input[5]+","+input[6]+","+input[7]);
+                bw.close();
+            }
+            catch(IOException e) {
+                System.out.println("File could not be created");
+                e.printStackTrace();
+            }
+        }
 
 }
