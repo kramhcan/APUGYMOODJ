@@ -97,7 +97,8 @@ public class PaymentGUI extends JFrame {
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.NO_OPTION) {return;}
                 String[] split = cbMemberID.getSelectedItem().toString().split(" ; ");
-                fn.enableMember(split[0]);
+                String cost = txtCostMember.getText();
+                fn.enableMember(split[0], cost);
                 memberListGUI sg = new memberListGUI(username);
                 paymentFrame.dispose();
             }
@@ -126,7 +127,8 @@ public class PaymentGUI extends JFrame {
                 int reply = JOptionPane.showConfirmDialog(null, "Are you sure?", "Confirm", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.NO_OPTION) {return;}
                 String sessionID = cbSessionID.getSelectedItem().toString();
-                fn.setSessionPaid(sessionID);
+                String cost = txtCostSession.getText();
+                fn.setSessionPaid(sessionID, cost);
                 SessionsGUI sg = new SessionsGUI(username);
                 paymentFrame.dispose();
             }

@@ -5,6 +5,8 @@ import java.io.*;
 import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -294,19 +296,23 @@ abstract class ReadWrite{
         }
     }
 
-    public void enableMember(String ID){
+    public void enableMember(String ID, String amount){
         try {
             String recordID = "";
             StringBuffer sb = new StringBuffer();
             BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Member.txt"));
-            String s="";
+
+            String memberID = new String();
+            String s = "";
             int x = 0;
             while ((s=br.readLine()) != null){
                 String row;
+                String row2 = new String();
                 String data[] = new String[11];
                 data = s.split(",");
                 recordID = data[0].toString();
                 if(recordID.equals(ID)){
+                    memberID = data[0];
                     row = data[0]+","+data[1]+","+data[2]+","+data[3]+","+data[4]+","+data[5]+","+data[6]+","+data[7]+","+data[8]+","+data[9]+",Enabled";
                 } else {
                     row = s;
@@ -315,11 +321,14 @@ abstract class ReadWrite{
                 sb.append(row);
                 x++;
             }
-//            System.out.println(sb);
+
             File file = new File("src/main/resources/Member.txt");
             PrintWriter pw = new PrintWriter(new FileOutputStream(file,false));
             pw.print(sb);
             pw.close();
+
+          newPayment(memberID, amount, "Member");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -441,7 +450,7 @@ abstract class ReadWrite{
         }
     }
 
-    public void setSessionPaid(String ID){
+    public void setSessionPaid(String ID, String amount){
         try {
             String recordID = "";
             StringBuffer sb = new StringBuffer();
@@ -467,6 +476,9 @@ abstract class ReadWrite{
             PrintWriter pw = new PrintWriter(new FileOutputStream(file,false));
             pw.print(sb);
             pw.close();
+
+            newPayment(ID, amount, "Session");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -685,6 +697,56 @@ abstract class ReadWrite{
     public boolean validateEmail(String input){
         System.out.println("To prove a point");
         return false;
+    }
+
+    public void newPayment(String ID, String amount, String type){
+        try {
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd MMMM yyyy");
+            LocalDateTime now = LocalDateTime.now();
+            String paymentDate = dtf.format(now);
+
+            FileWriter fw = new FileWriter("src/main/resources/Payments.txt",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Payments.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[13];
+                data = s.split(",");
+                int i = Integer.parseInt(data[0]);
+                lastAcc = i;
+            }
+
+            bw.write("\r\n"+(lastAcc+1)+","+type+","+paymentDate+","+ID+","+amount);
+            bw.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public String[] getYears(){
+        try {
+            String duration = "";
+            ArrayList<Object> yearList = new ArrayList<>();
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Payments.txt"));
+            String s="";
+            while ((s=br.readLine()) != null){
+                String data[] = new String[5];
+                data = s.split(",");
+                for(int i = 0; i < yearList.size(); i++){
+                    if(data[2].equals(yearList.get(i))){continue;}
+                }
+                String date = data[2];
+                String year = date.substring(date.length() - 4);
+                yearList.add(year);
+            }
+            Object[] yearArray = yearList.toArray();
+            String[] res = Arrays.copyOf(yearArray, yearArray.length, String[].class);
+            return res;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }

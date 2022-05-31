@@ -99,5 +99,12 @@ public class IndexGUI extends JFrame {
                 mainFrame.dispose();
             }
         });
+        reportButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                RegisterGUI rg = new RegisterGUI(username);
+                mainFrame.dispose();
+            }
+        });
     }
 }
