@@ -102,7 +102,14 @@ public class IndexGUI extends JFrame {
         reportButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                RegisterGUI rg = new RegisterGUI(username);
+                ReportGUI rg = new ReportGUI(username);
+                mainFrame.dispose();
+            }
+        });
+        feedbackButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Feedback rg = new Feedback(username);
                 mainFrame.dispose();
             }
         });

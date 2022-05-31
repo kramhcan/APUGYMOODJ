@@ -754,13 +754,11 @@ abstract class ReadWrite{
             while ((s=br.readLine()) != null){
                 String data[] = new String[5];
                 data = s.split(",");
-                for(int i = 0; i < yearList.size(); i++){
-                    if(data[2].equals(yearList.get(i))){continue;}
-                }
                 String date = data[2];
                 String year = date.substring(date.length() - 4);
                 yearList.add(year);
             }
+            yearList = removeDuplicates(yearList);
             Object[] yearArray = yearList.toArray();
             String[] res = Arrays.copyOf(yearArray, yearArray.length, String[].class);
             return res;
@@ -768,6 +766,40 @@ abstract class ReadWrite{
             e.printStackTrace();
         }
         return null;
+    }
+
+    public Object[][] reportTableData(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("src/main/resources/Payments.txt"));
+            String s="";
+            Path path = Path.of("src/main/resources/Payments.txt");
+            int lines = (int) Files.lines(path).count();
+
+            Object dataMulti[][]= new Object[lines][5];
+            Object dataSingle[] = new Object[5];
+
+            int r = 0;
+            while ((s=br.readLine()) != null){
+                dataSingle = s.split(",");
+                for(int i = 0; i<5; i++){
+                    dataMulti[r][i] = dataSingle[i];
+                }
+                r++;
+            }
+            return dataMulti;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static <T> ArrayList<T> removeDuplicates(ArrayList<T> list)
+    {
+        ArrayList<T> newList = new ArrayList<T>();
+        for (T element : list) {
+            if (!newList.contains(element)) {   newList.add(element);   }
+        }
+        return newList;
     }
 
     public String getSessionDate(String sessionID) {
