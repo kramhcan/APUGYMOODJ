@@ -37,10 +37,10 @@ abstract class ReadWrite{
                 staffStatus = data[12].toString();
                 if(staffStatus.equals("Disabled")){ JOptionPane.showMessageDialog(null, "This account has been deactivated");
                     return false;   }
-                if(!recordUsername.equals(username) && !recordPassword.equals(password)){  JOptionPane.showMessageDialog(null, "Account or Password is incorrect");
-                    return false;   }
+                if(!recordUsername.equals(username) && !recordPassword.equals(password)){  continue;   }
                 return true;
             }
+            JOptionPane.showMessageDialog(null, "Account or Password is incorrect");
         } catch (IOException e) {
             e.printStackTrace();
         }
